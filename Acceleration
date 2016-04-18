@@ -1,0 +1,99 @@
+class Acceleration extends Quadequations {
+
+	static final int aX = 0;
+	static final double gravity = -9.8;
+	double height;
+	double xVelocity;
+	double yVelocity;
+	double time;
+	double xDistance;
+	double yDistance;
+
+	public double toRadians(double number) {
+		double radianNumber = 0;
+
+		radianNumber = (number * Math.PI) / 180;
+
+		return radianNumber;
+	}
+
+	public void initialXVelocity(double initialVelocity, double degreeShot) {
+
+		this.xVelocity = initialVelocity * Math.cos(toRadians(degreeShot));
+
+	}
+
+	public void initialYVelocity(double initialVelocity, double degreeShot) {
+
+		this.yVelocity = initialVelocity * Math.sin(toRadians(degreeShot));
+
+	}
+
+	public void setTime() {
+
+		this.time = ((0 - yVelocity) / gravity);
+		this.time = time * 2;
+
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+	public void setTimeWIthHeight() {
+		double quadraticsSub = theEquationSub(getSetDiscrimentant(gravity / 2, yVelocity, height), gravity / 2,
+				yVelocity);
+		double quadraticsAdd = theEquationSub(getSetDiscrimentant(gravity / 2, yVelocity, height), gravity / 2,
+				yVelocity);
+
+		if (quadraticsAdd < quadraticsSub && quadraticsAdd > 0) {
+			this.time = quadraticsAdd;
+		}
+
+		else if (quadraticsSub < quadraticsAdd && quadraticsSub > 0) {
+			this.time = quadraticsSub;
+		} else {
+			this.time = quadraticsAdd;
+		}
+
+	}
+
+	public double xSetDistance() {
+
+		xDistance = xVelocity * time;
+		return xDistance;
+	}
+
+	public double ySetDistance() {
+		double averageYVelocity = (yVelocity + 0) / 2;
+		yDistance = averageYVelocity * time / 2;
+		yDistance += height;
+		return yDistance;
+	}
+
+	public double getXVelocity() {
+		return xVelocity;
+	}
+
+	public double getYVelocity() {
+		return yVelocity;
+	}
+
+	public double getTime() {
+		return time;
+	}
+
+	public Acceleration(double initialVelocity, double degreeShot) {
+		this.initialXVelocity(initialVelocity, degreeShot);
+		this.initialYVelocity(initialVelocity, degreeShot);
+		this.setTime();
+	}
+
+	public Acceleration(double initialVelocity, double degreeShot, double height) {
+		this.initialXVelocity(initialVelocity, degreeShot);
+		this.initialYVelocity(initialVelocity, degreeShot);
+		this.setHeight(height);
+		this.setTimeWIthHeight();
+	}
+
+}
