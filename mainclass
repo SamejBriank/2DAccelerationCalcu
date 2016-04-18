@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Scanner scanner = new Scanner(System.in);
+
+		// 0 = VELCOITY; 1 = ANGLE
+		double[] userInput = new double[3];
+		String code;
+
+		String[] usersInput = { "speed", "angle", "height" };
+		String[] usersUnit = { "m/s", "°", "m" };
+
+		boolean loopState = true;
+
+		while (loopState) {
+
+			for (int i = 0; i < usersInput.length; i++) {
+				System.out.printf("What is your %s (%s)\n", usersInput[i], usersUnit[i]);
+				userInput[i] = scanner.nextDouble();
+
+			}
+
+			Acceleration accel;
+			if (userInput[2] == 0) {
+				accel = new Acceleration(userInput[0], userInput[1]);
+			} else {
+				accel = new Acceleration(userInput[0], userInput[1], userInput[2]);
+			}
+			System.out.println("\n////////////////////////////////////////RESULTS");
+			// Velocity
+			System.out.printf("Inital X velocity: %.2f m/s Inital Y velocity: %.2f m/s \n", accel.getXVelocity(),
+					accel.getYVelocity());
+			// Time
+			System.out.printf("Total flight time: %.2fsecs \n", accel.getTime());
+			// Distance
+			System.out.printf("Total Distance traveled(X Distance): %.2fm Distance of peak(Y Distance):%.2fm\n",
+					accel.xSetDistance(), accel.ySetDistance());
+
+			// Reset
+			System.out.println("Run again?");
+			scanner.nextLine();
+			String response = scanner.nextLine();
+
+			switch (response) {
+			case "stop":
+				System.out.println("Okay, stopping!");
+				loopState = false;
+				break;
+			case "no":
+				System.out.println("Okay, stopping!");
+				loopState = false;
+				break;
+			default:
+				System.out.println("Running...\n");
+			}
+
+		}
+
+	}
+
+}
