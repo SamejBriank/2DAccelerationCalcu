@@ -1,0 +1,26 @@
+public class Quadequations {
+	
+	public double getSetDiscrimentant(double a, double b, double c){
+		double discrimentant = (b*b) + (-4*a*c);
+		//System.out.println(-4*a*c);
+		return discrimentant;
+	}
+
+	public double theEquationAdd(double discrimentant, double a, double b) {
+
+		discrimentant = Math.sqrt(discrimentant);
+		double result = (-b + discrimentant) / (2 * a);
+
+		return result;
+	}
+
+	public double theEquationSub(double discrimentant, double a, double b) {
+
+		discrimentant = Math.sqrt(discrimentant);
+		double result = (-b - discrimentant) / (2 * a);
+
+		return result;
+	}
+
+
+}
